@@ -1,0 +1,35 @@
+server:
+  port: 5440
+
+spring:
+  application:
+    name: SubTrack
+  datasource:
+    url: ${DB_HOST}
+    username: ${DB_LOGIN}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    database: postgresql
+    hibernate:
+      ddl-auto: validate # поменять на validate и сделать миграцию
+    properties:
+      hibernate:
+        format_sql: true
+        connection:
+          driver_class: ${spring.datasource.driver-class-name}
+          password: ${spring.datasource.password}
+          username: ${spring.datasource.username}
+          url: ${spring.datasource.url}
+
+  flyway:
+    enabled: true
+
+logging:
+  level:
+    root: INFO
+    org:
+      hibernate:
+        sql: DEBUG
