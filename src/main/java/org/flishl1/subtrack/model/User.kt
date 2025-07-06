@@ -16,24 +16,24 @@ data class User(
     @Generated
     @ColumnDefault("gen_random_uuid()")
     @Column(name = "uuid")
-    val uuid: UUID,
+    val uuid: UUID? = null,
     @NaturalId
-    @Column(name = "email", nullable = false, length = 255)
-    val email: String,
+    @Column(name = "email", nullable = true, length = 255)
+    val email: String? = null,
     @Column(name = "first_name", length = 255)
-    val firstName: String,
+    val firstName: String?,
     @Column(name = "last_name", length = 255)
-    val lastName: String,
-    @Column(name = "password", nullable = false, length = 255)
-    val password: String,
-    @Column(name = "telegram_chat_id")
-    val telegramChatId: String,
+    val lastName: String?,
+    @Column(name = "password", nullable = true, length = 255)
+    val password: String? = null,
+    @Column(name = "telegram_chat_id", unique = true)
+    val telegramChatId: String?,
     @Generated(event = [EventType.INSERT])
     @ColumnDefault("now()")
     @Column(name = "created_at", nullable = false)
-    val createdAt: LocalDateTime,
+    val createdAt: LocalDateTime? = null,
     @Generated(event = [EventType.INSERT, EventType.UPDATE])
     @ColumnDefault("now()")
     @Column(name = "updated_at", nullable = false)
-    val updatedAt: LocalDateTime,
+    val updatedAt: LocalDateTime? = null,
 )
