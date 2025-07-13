@@ -4,11 +4,6 @@ server:
 spring:
   application:
     name: SubTrack
-  datasource:
-    url: ${DB_URL}
-    username: ${DB_LOGIN}
-    password: ${DB_PASSWORD}
-    driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
     generate-ddl: true
@@ -27,10 +22,6 @@ spring:
   flyway:
     enabled: true
 
-bot:
-  telegram_bot_name: ${TELEGRAM_BOT_NAME}
-  telegram_api: ${TELEGRAM_BOT_API}
-  telegram_creator_id: ${TELEGRAM_CREATOR_ID}
 
 logging:
   level:

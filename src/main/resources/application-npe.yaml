@@ -1,0 +1,11 @@
+bot:
+  telegram_bot_name: ${TELEGRAM_BOT_NAME_TEST}
+  telegram_api: ${TELEGRAM_BOT_API_TEST}
+  telegram_creator_id: ${TELEGRAM_CREATOR_ID}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/subtrack
+    username: subtrack
+    password: secret
+    driver-class-name: org.postgresql.Driver
