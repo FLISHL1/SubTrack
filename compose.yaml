@@ -2,6 +2,8 @@ services:
   postgres:
     image: 'postgres:17.5'
     container_name: subtrack_db
+    volumes:
+      - subtrack_data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -15,7 +17,7 @@ services:
       retries: 5
   app:
     build: .
-    image: subtrack-app:1.0.0
+    image: subtrack-app:0.0.2
     container_name: backend
     ports:
       - "5440:5440"
@@ -31,3 +33,5 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+volumes:
+  subtrack_data:
