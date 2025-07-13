@@ -5,7 +5,7 @@ spring:
   application:
     name: SubTrack
   datasource:
-    url: ${DB_HOST}
+    url: ${DB_URL}
     username: ${DB_LOGIN}
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver

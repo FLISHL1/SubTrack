@@ -8,3 +8,25 @@ services:
       POSTGRES_USER: ${DB_LOGIN}
     ports:
       - '5432:5432'
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  app:
+    build: .
+    image: subtrack-app:1.0.0
+    container_name: backend
+    ports:
+      - "5440:5440"
+    environment:
+      DB_URL: ${DB_URL}
+      DB_LOGIN: ${DB_LOGIN}
+      DB_PASSWORD: ${DB_PASSWORD}
+      TELEGRAM_BOT_API: ${TELEGRAM_BOT_API}
+      TELEGRAM_CREATOR_ID: ${TELEGRAM_CREATOR_ID}
+      TELEGRAM_BOT_NAME: ${TELEGRAM_BOT_NAME}
+      # JAVA_OPTS: "-Xmx512m -Xms256m"  # Можно переопределить при необходимости
+    depends_on:
+      postgres:
+        condition: service_healthy

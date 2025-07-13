@@ -1,7 +1,8 @@
 package org.flishl1.subtrack.config;
 
-import org.flishl1.subtrack.controllers.SubTrackBot;
+import org.flishl1.subtrack.bot.core.SubTrackBot;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
@@ -18,16 +19,16 @@ public class TelegramBotConfig {
     private Integer creatorId;
 
     @Bean
-    public SubTrackBot subTrackBot() {
+    public SubTrackBot subTrackBot(ApplicationContext context) {
 
         TelegramBotsLongPollingApplication botApplication = telegramBotsLongPollingApplication();
         try {
             SubTrackBot subTrackBot = new SubTrackBot(
                     new OkHttpTelegramClient(telegramApi),
                     botUsername,
-                    creatorId
+                    creatorId,
+                    context
             );
-            subTrackBot.onRegister();
             botApplication.registerBot(telegramApi, subTrackBot);
             return subTrackBot;
         } catch (TelegramApiException e) {
