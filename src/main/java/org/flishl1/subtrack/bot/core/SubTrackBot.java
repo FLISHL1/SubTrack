@@ -20,7 +20,7 @@ public class SubTrackBot extends AbilityBot {
             Integer creatorId,
             ApplicationContext context
     ) {
-        super(telegramClient, botUsername);
+        super(telegramClient, botUsername, new PostgresDBContext());
         this.creatorId = creatorId;
 
         this.context = context;
