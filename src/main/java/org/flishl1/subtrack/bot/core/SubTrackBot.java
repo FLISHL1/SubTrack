@@ -4,10 +4,13 @@ package org.flishl1.subtrack.bot.core;
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.ApplicationContext;
 import org.telegram.telegrambots.abilitybots.api.bot.AbilityBot;
+import org.telegram.telegrambots.abilitybots.api.objects.Reply;
 import org.telegram.telegrambots.abilitybots.api.util.AbilityExtension;
+import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class SubTrackBot extends AbilityBot {
     private final Integer creatorId;
@@ -31,10 +34,6 @@ public class SubTrackBot extends AbilityBot {
         return creatorId;
     }
 
-//    @Override
-//    public void addExtension(AbilityExtension extension) {
-//        super.addExtension(extension);
-//    }
 
     @PostConstruct
     public void registerExtensions() {
@@ -46,4 +45,6 @@ public class SubTrackBot extends AbilityBot {
     protected String getCommandPrefix() {
         return "/";
     }
+
+
 }

@@ -7,30 +7,31 @@ import org.springframework.transaction.annotation.Transactional
 import org.telegram.telegrambots.meta.api.objects.User as UserTg
 
 
-//fun <S : User?> UserRepository.saveAndFlishUser(entity: S?): S? {
-//    return saveAndFlush(entity);
-//}
-
-
 @Service
+@Transactional
 open class UserService(
     private val userRepository: UserRepository
 ) {
-    @Transactional
     open fun createUser(
         userInfo: UserTg
     ): User {
-        var user = User(
-            firstName = userInfo.firstName,
-            lastName = userInfo.lastName,
-            telegramChatId = userInfo.id.toString()
-        )
+        var user = User.Builder()
+            .firstName(userInfo.firstName)
+            .lastName(userInfo.lastName)
+            .telegramChatId(userInfo.id.toString())
+            .build();
         user = userRepository.saveAndFlush(user)
         return user
     }
 
-    @Transactional
-    open fun existUser(telegramId: String): Boolean {
-        return userRepository.existsByTelegramChatId(telegramId)
+    open fun getUser(
+        userTgId: Long
+    ): User {
+        val user: User = userRepository.getByTelegramChatId(userTgId.toString())
+        return user
+    }
+
+    open fun existUser(telegramId: Long): Boolean {
+        return userRepository.existsByTelegramChatId(telegramId.toString())
     }
 }

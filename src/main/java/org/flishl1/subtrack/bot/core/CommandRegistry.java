@@ -1,20 +1,21 @@
 package org.flishl1.subtrack.bot.core;
 
 import jakarta.annotation.PostConstruct;
-import lombok.extern.slf4j.Slf4j;
-import org.flishl1.subtrack.bot.handler.CommandHandler;
-import org.flishl1.subtrack.bot.handler.StartCommandHandler;
+import org.flishl1.subtrack.bot.handler.command.CommandHandler;
+import org.flishl1.subtrack.bot.handler.command.StartCommandHandler;
 import org.flishl1.subtrack.enums.bot.Command;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.abilitybots.api.objects.MessageContext;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Slf4j
 @Component
 public class CommandRegistry {
+
+    private static final Logger log = LoggerFactory.getLogger(CommandRegistry.class);
     private final Map<Command, CommandHandler> handlers = new HashMap<>();
     private final StartCommandHandler startCommandHandler;
 
